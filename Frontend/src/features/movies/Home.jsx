@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div className="text-white">
-      <HeroBanner movie={hero} />
+      {hero && <HeroBanner movie={hero} />}
 
       <div className="p-8">
         {/* Trending */}
