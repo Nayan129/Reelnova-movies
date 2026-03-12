@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://reelnova-movie-app.netlify.app",
+    origin: ["https://reelnova-movies.netlify.app", "http://localhost:5173"],
     credentials: true,
   }),
 );
