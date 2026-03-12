@@ -7,7 +7,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://reelnova-movies.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://reelnova-movies.vercel.app",
+      "https://reelnova-movies-bdyskxt99-nayans-projects-36235e77.vercel.app",
+    ],
     credentials: true,
   }),
 );
