@@ -13,7 +13,10 @@ const Favorite = () => {
     } catch (err) {
       if (err.response?.status === 401) {
         navigate("/login");
+        return;
       }
+
+      console.log(err);
     }
   };
 

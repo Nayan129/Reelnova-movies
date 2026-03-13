@@ -12,9 +12,12 @@ const History = () => {
 
       setHistory(res.data.history || []);
     } catch (err) {
-      if (err.response?.status === 404 || err.response?.status === 401) {
+      if (err.response?.status === 401) {
         navigate("/login");
+        return;
       }
+
+      console.log(err);
     }
   };
 
