@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
   const [history, setHistory] = useState([]);
+  const navigate = useNavigate();
 
   const fetchHistory = async () => {
     try {
@@ -10,8 +12,8 @@ const History = () => {
 
       setHistory(res.data.history || []);
     } catch (err) {
-      if (err.response?.status === 401) {
-        window.location.href = "/login";
+      if (err.response?.status === 404 || err.response?.status === 401) {
+        navigate("/login");
       }
     }
   };

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate();
 
   const fetchFavorites = async () => {
     try {
@@ -10,7 +12,7 @@ const Favorite = () => {
       setFavorites(res.data.allFavorites || []);
     } catch (err) {
       if (err.response?.status === 401) {
-        window.location.href = "/login";
+        navigate("/login");
       }
     }
   };
@@ -25,7 +27,9 @@ const Favorite = () => {
 
       setFavorites(favorites.filter((movie) => movie._id !== id));
     } catch (err) {
-      console.log(err);
+      if (err.response?.status === 404 || err.response?.status === 401) {
+        navigate("/login");
+      }
     }
   };
 

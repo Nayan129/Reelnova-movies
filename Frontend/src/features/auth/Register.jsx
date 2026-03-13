@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { registerUser } from "./authApi";
+import { loginUser, registerUser } from "./authApi";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -13,11 +14,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await registerUser(form);
 
-      // auto login
       await loginUser({
         email: form.email,
         password: form.password,
@@ -26,7 +25,7 @@ const Register = () => {
       navigate("/");
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      setError(err.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -58,7 +57,7 @@ const Register = () => {
           className="w-full mb-6 p-3 bg-slate-700 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
-
+        {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
         <button className="bg-red-500 w-full py-3 rounded font-semibold hover:bg-red-600 transition">
           Register
         </button>
