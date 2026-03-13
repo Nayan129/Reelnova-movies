@@ -17,11 +17,11 @@ app.use(cookieParser());
 // );
 app.use(
   cors({
-    origin: true,
+    origin: "https://reelnova-movies.vercel.app",
     credentials: true,
   }),
 );
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.send("API working 🚀");
 });
 
