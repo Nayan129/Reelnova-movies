@@ -22,9 +22,18 @@ const History = () => {
   };
 
   useEffect(() => {
-    fetchHistory();
-  }, []);
+    const checkUser = async () => {
+      try {
+        await api.get("/api/auth/get-me");
+        fetchHistory();
+      } catch {
+        navigate("/login");
+      }
+    };
 
+    checkUser();
+  }, []);
+  
   const clearAllHistory = async () => {
     try {
       await api.delete("/api/history/clear");

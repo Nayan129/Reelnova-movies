@@ -9,6 +9,7 @@ const Favorite = () => {
   const fetchFavorites = async () => {
     try {
       const res = await api.get("/api/favorites");
+      console.log(res.data);
       setFavorites(res.data.allFavorites || []);
     } catch (err) {
       if (err.response?.status === 401) {
@@ -21,7 +22,16 @@ const Favorite = () => {
   };
 
   useEffect(() => {
-    fetchFavorites();
+    const checkUser = async () => {
+      try {
+        await api.get("/api/auth/get-me");
+        fetchFavorites();
+      } catch {
+        navigate("/login");
+      }
+    };
+
+    checkUser();
   }, []);
 
   const removeFavorite = async (id) => {
