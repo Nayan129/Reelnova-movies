@@ -21,6 +21,9 @@ app.use(
     credentials: true,
   }),
 );
+app.get("/test", (req, res) => {
+  res.send("API working 🚀");
+});
 
 /**
  * Routes import and use here..
