@@ -10,7 +10,9 @@ const History = () => {
 
       setHistory(res.data.history || []);
     } catch (err) {
-      console.log(err);
+      if (err.response?.status === 401) {
+        window.location.href = "/login";
+      }
     }
   };
 

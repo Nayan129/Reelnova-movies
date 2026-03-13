@@ -17,7 +17,14 @@ const Register = () => {
     try {
       await registerUser(form);
 
-      navigate("/login");
+      // auto login
+      await loginUser({
+        email: form.email,
+        password: form.password,
+      });
+
+      navigate("/");
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }

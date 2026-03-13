@@ -7,10 +7,11 @@ const Favorite = () => {
   const fetchFavorites = async () => {
     try {
       const res = await api.get("/api/favorites");
-
       setFavorites(res.data.allFavorites || []);
     } catch (err) {
-      console.log(err);
+      if (err.response?.status === 401) {
+        window.location.href = "/login";
+      }
     }
   };
 
