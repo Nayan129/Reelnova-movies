@@ -35,7 +35,7 @@ import favRouter from "./routes/favorite.routes.js";
 import historyRouter from "./routes/history.routes.js";
 import adminRouter from "./routes/admin.routes.js";
 app.use("/api/auth", authRouter);
-app.use("/movies", movieRouter);
+app.use("api/movies", movieRouter);
 app.use("/api/tmdb", tmdbRouter);
 app.use("/api/favorites", favRouter);
 app.use("/api/history", historyRouter);
