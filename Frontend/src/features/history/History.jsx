@@ -10,14 +10,16 @@ const History = () => {
     try {
       const res = await api.get("/api/history");
 
-      setHistory(res.data.history || []);
+      console.log("HISTORY RESPONSE:", res.data);
+
+      setHistory(res.data.history || res.data.allHistory || []);
     } catch (err) {
+      console.log("HISTORY ERROR:", err.response);
+
       if (err.response?.status === 401) {
         navigate("/login");
         return;
       }
-
-      console.log(err);
     }
   };
 
@@ -33,7 +35,7 @@ const History = () => {
 
     checkUser();
   }, []);
-  
+
   const clearAllHistory = async () => {
     try {
       await api.delete("/api/history/clear");
