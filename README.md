@@ -2,7 +2,7 @@
 
 A modern full-stack movie discovery platform where users can explore trending movies, search titles, watch trailers, manage favorites, and track watch history. The project is built with a **production-style architecture** using React, Node.js, MongoDB, and Redis, and deployed to the cloud.
 
-🌐 **Live Demo:** reelnova-movies.vercel.app 
+🌐 **Live Demo:** https://reelnova-movies.vercel.app
 ⚙️ **Backend API:** https://reelnova-movie-app.onrender.com
 
 ---
