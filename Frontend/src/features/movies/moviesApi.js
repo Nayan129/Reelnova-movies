@@ -1,6 +1,6 @@
 import api from "../../api/axios";
 
-const retryRequest = async (request, retries = 3, delay = 1000) => {
+const retryRequest = async (request, retries = 2, delay = 600) => {
   try {
     return await request();
   } catch (error) {

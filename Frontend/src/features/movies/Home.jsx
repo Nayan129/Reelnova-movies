@@ -54,9 +54,9 @@ const Home = () => {
         <div className="flex gap-6 overflow-x-auto pb-4 mb-10">
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
-            : trending.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
+            : trending
+                .slice(0, 10)
+                .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
         {/* Popular Movies */}
@@ -65,9 +65,9 @@ const Home = () => {
         <div className="flex gap-6 overflow-x-auto pb-4 mb-10">
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
-            : popular.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
+            : popular
+                .slice(0, 10)
+                .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
         {/* TV Shows */}
@@ -76,7 +76,7 @@ const Home = () => {
         <div className="flex gap-6 overflow-x-auto pb-4 mb-10">
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
-            : tvShows.map((show) => (
+            : tvShows.slice(0, 10).map((show) => (
                 <MovieCard
                   key={show.id}
                   movie={{

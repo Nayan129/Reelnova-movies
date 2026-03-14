@@ -8,7 +8,7 @@ const MovieCard = ({ movie }) => {
   const title = movie.title || movie.name;
 
   const poster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : "";
 
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "N/A";
@@ -38,7 +38,8 @@ const MovieCard = ({ movie }) => {
           src={poster}
           alt={title}
           loading="lazy"
-          decoding="async"
+          width="342"
+          height="513"
           className="w-full h-75 object-cover"
         />
 
