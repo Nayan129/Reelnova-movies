@@ -34,7 +34,13 @@ const MovieCard = ({ movie }) => {
   return (
     <Link to={`/${mediaType}/${movie.id}`}>
       <div className="relative min-w-55 bg-slate-800 rounded-lg overflow-hidden hover:scale-105 transition">
-        <img src={poster} alt={title} className="w-full h-75 object-cover" />
+        <img
+          src={poster}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+          className="w-full h-75 object-cover"
+        />
 
         <button
           onClick={toggleFavorite}
@@ -59,4 +65,6 @@ const MovieCard = ({ movie }) => {
   );
 };
 
-export default MovieCard;
+// used react.memo so that react not render every child unnecesarily
+import React from "react";
+export default React.memo(MovieCard);

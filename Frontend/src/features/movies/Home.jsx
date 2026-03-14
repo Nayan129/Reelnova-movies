@@ -14,9 +14,11 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendingRes = await getTrendingMovies().catch(() => null);
-        const popularRes = await getPopularMovies().catch(() => null);
-        const tvRes = await getTVShows().catch(() => null);
+        const [trendingRes, popularRes, tvRes] = await Promise.all([
+          getTrendingMovies().catch(() => null),
+          getPopularMovies().catch(() => null),
+          getTVShows().catch(() => null),
+        ]);
 
         const trendingMovies = trendingRes?.data?.movies ?? [];
         const popularMovies = popularRes?.data?.movies ?? [];
