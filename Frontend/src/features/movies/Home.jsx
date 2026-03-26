@@ -11,22 +11,14 @@ const Home = () => {
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // this will prevent UI blocking, hero load faster
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchInitial = async () => {
       try {
-        const [trendingRes, popularRes, tvRes] = await Promise.all([
-          getTrendingMovies().catch(() => null),
-          getPopularMovies().catch(() => null),
-          getTVShows().catch(() => null),
-        ]);
-
+        const trendingRes = await getTrendingMovies();
         const trendingMovies = trendingRes?.data?.movies ?? [];
-        const popularMovies = popularRes?.data?.movies ?? [];
-        const tvShowsData = tvRes?.data?.tvShows ?? [];
 
         setTrending(trendingMovies);
-        setPopular(popularMovies);
-        setTvShows(tvShowsData);
 
         if (trendingMovies.length) {
           const random =
@@ -40,12 +32,33 @@ const Home = () => {
       setLoading(false);
     };
 
-    fetchMovies();
+    const fetchRest = async () => {
+      try {
+        const [popularRes, tvRes] = await Promise.all([
+          getPopularMovies().catch(() => null),
+          getTVShows().catch(() => null),
+        ]);
+
+        setPopular(popularRes?.data?.movies ?? []);
+        setTvShows(tvRes?.data?.tvShows ?? []);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInitial();
+    setTimeout(fetchRest, 500);
   }, []);
+
 
   return (
     <div className="text-white">
-      {hero && <HeroBanner movie={hero} />}
+      {/* improve LCP */}
+      {hero ? (
+        <HeroBanner movie={hero} />
+      ) : (
+        <div className="h-[60vh] bg-gray-900" />
+      )}
 
       <div className="p-8">
         {/* Trending */}

@@ -1,40 +1,43 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 
-import Home from "../features/movies/Home";
-import Favorites from "../features/favorites/Favorite";
-import History from "../features/history/History";
-import Login from "../features/auth/Login";
-import Register from "../features/auth/Register";
-import MovieDetails from "../features/movies/MovieDetails";
-import SearchPage from "../features/Search/SearchPage";
+// lazy loaded pages
+const Home = lazy(() => import("./pages/Home"));
+const MovieDetails = lazy(() => import("./pages/MovieDetails"));
+const Favorites = lazy(() => import("../features/favorites/Favorite"));
+const History = lazy(() => import("../features/history/History"));
+const Login = lazy(() => import("../features/auth/Login"));
+const Register = lazy(() => import("../features/auth/Register"));
+const SearchPage = lazy(() => import("../features/Search/SearchPage"));
+
 import ProtectedRoute from "../components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <Suspense fallback={<div className="text-white p-6">Loading...</div>}>
+        <App />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
         element: <Home />,
       },
-
       {
         path: "movie/:id",
         element: <MovieDetails />,
       },
-
       {
         path: "tv/:id",
         element: <MovieDetails />,
       },
-
       {
         path: "search",
         element: <SearchPage />,
       },
-
       {
         path: "favorites",
         element: (
@@ -43,7 +46,6 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
       {
         path: "history",
         element: (
@@ -52,12 +54,10 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
       {
         path: "login",
         element: <Login />,
       },
-
       {
         path: "register",
         element: <Register />,

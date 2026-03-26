@@ -40,7 +40,11 @@ const MovieCard = ({ movie }) => {
           loading="lazy"
           width="342"
           height="513"
+          decoding="async"
           className="w-full h-75 object-cover"
+          onError={(e) => {
+            e.target.src = "https://via.placeholder.com/342x513?text=No+Image";
+          }}
         />
 
         <button
