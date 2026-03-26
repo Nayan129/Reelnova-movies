@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
       {" "}
-      <Navbar /> <Outlet />{" "}
+      <Navbar /> <Outlet />
     </div>
   );
 }
