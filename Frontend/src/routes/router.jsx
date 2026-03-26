@@ -3,8 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 
 // lazy loaded pages
-const Home = lazy(() => import("./pages/Home"));
-const MovieDetails = lazy(() => import("./pages/MovieDetails"));
+const Home = lazy(() => import("../features/movies/Home"));
+const MovieDetails = lazy(() => import("../features/movies/MovieDetails"));
 const Favorites = lazy(() => import("../features/favorites/Favorite"));
 const History = lazy(() => import("../features/history/History"));
 const Login = lazy(() => import("../features/auth/Login"));
