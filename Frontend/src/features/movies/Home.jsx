@@ -79,7 +79,7 @@ const Home = () => {
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
             : popular
-                .slice(0, 10)
+                .slice(0, 6)
                 .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
@@ -89,7 +89,7 @@ const Home = () => {
         <div className="flex gap-6 overflow-x-auto pb-4 mb-10">
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
-            : tvShows.slice(0, 10).map((show) => (
+            : tvShows.slice(0, 6).map((show) => (
                 <MovieCard
                   key={show.id}
                   movie={{

@@ -47,11 +47,8 @@ const MovieCard = ({ movie }) => {
           }}
         />
 
-        <button
-          onClick={toggleFavorite}
-          className="absolute top-2 right-2 text-2xl"
-        >
-          <span className={fav ? "text-red-500" : "text-white"}>
+        <button onClick={toggleFavorite} className="absolute top-2 right-2">
+          <span className={fav ? "text-red-500 text-xl" : "text-white text-xl"}>
             {fav ? "❤️" : "🤍"}
           </span>
         </button>

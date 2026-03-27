@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const HeroBanner = ({ movie }) => {
   if (!movie) return null;
 
-  const backdrop = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+ const backdrop = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
 
   return (
     <div className="relative h-[60vh] flex items-center px-6 md:px-10 text-white overflow-hidden">
