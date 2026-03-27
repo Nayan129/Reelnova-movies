@@ -68,7 +68,7 @@ const Home = () => {
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
             : trending
-                .slice(0, 10)
+                .slice(0, 6)
                 .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
