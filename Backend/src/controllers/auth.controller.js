@@ -131,7 +131,7 @@ async function logoutController(req, res) {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    domain: ".onrender.com",
+    path: "/",
   });
 
   await redis.set(token, Date.now().toString(), "EX", 60 * 60);

@@ -19,10 +19,22 @@ const Navbar = () => {
     };
 
     fetchUser();
+
+    const handleAuthChange = () => fetchUser();
+
+    window.addEventListener("authChange", handleAuthChange);
+
+    return () => {
+      window.removeEventListener("authChange", handleAuthChange);
+    };
   }, []);
 
   const logout = async () => {
     await logoutUser();
+
+    localStorage.setItem("auth", Date.now());
+    window.dispatchEvent(new Event("authChange"));
+
     setUser(null);
     navigate("/");
   };
