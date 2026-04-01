@@ -3,27 +3,15 @@ import { Link } from "react-router-dom";
 const HeroBanner = ({ movie }) => {
   if (!movie) return null;
 
- const backdrop = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
+  const backdrop = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
   return (
-    <div className="relative h-[60vh] flex items-center px-6 md:px-10 text-white overflow-hidden">
-      
-      {/* 🔥 IMPORTANT: use img instead of background */}
-      <img
-        src={backdrop}
-        alt={movie.title}
-        className="absolute inset-0 w-full h-full object-cover"
-        loading="eager"
-        fetchpriority="high"
-      />
-
-      {/* overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
-
-      <div className="relative max-w-xl z-10">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">
-          {movie.title}
-        </h1>
+    <div
+      className="h-[60vh] flex items-center px-6 md:px-10 text-white bg-cover bg-center"
+      style={{ backgroundImage: `url(${backdrop})` }}
+    >
+      <div className="max-w-xl">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">{movie.title}</h1>
 
         <p className="mb-6 line-clamp-3">{movie.overview}</p>
 
@@ -35,10 +23,7 @@ const HeroBanner = ({ movie }) => {
             Watch Trailer
           </Link>
 
-          <Link
-            to={`/movie/${movie.id}`}
-            className="border px-5 py-2 rounded"
-          >
+          <Link to={`/movie/${movie.id}`} className="border px-5 py-2 rounded">
             Add To Favorites
           </Link>
         </div>

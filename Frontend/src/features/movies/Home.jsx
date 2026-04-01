@@ -11,14 +11,22 @@ const Home = () => {
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // this will prevent UI blocking, hero load faster
   useEffect(() => {
-    const fetchInitial = async () => {
+    const fetchMovies = async () => {
       try {
-        const trendingRes = await getTrendingMovies();
+        const [trendingRes, popularRes, tvRes] = await Promise.all([
+          getTrendingMovies().catch(() => null),
+          getPopularMovies().catch(() => null),
+          getTVShows().catch(() => null),
+        ]);
+
         const trendingMovies = trendingRes?.data?.movies ?? [];
+        const popularMovies = popularRes?.data?.movies ?? [];
+        const tvShowsData = tvRes?.data?.tvShows ?? [];
 
         setTrending(trendingMovies);
+        setPopular(popularMovies);
+        setTvShows(tvShowsData);
 
         if (trendingMovies.length) {
           const random =
@@ -32,33 +40,12 @@ const Home = () => {
       setLoading(false);
     };
 
-    const fetchRest = async () => {
-      try {
-        const [popularRes, tvRes] = await Promise.all([
-          getPopularMovies().catch(() => null),
-          getTVShows().catch(() => null),
-        ]);
-
-        setPopular(popularRes?.data?.movies ?? []);
-        setTvShows(tvRes?.data?.tvShows ?? []);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchInitial();
-    setTimeout(fetchRest, 500);
+    fetchMovies();
   }, []);
-
 
   return (
     <div className="text-white">
-      {/* improve LCP */}
-      {hero ? (
-        <HeroBanner movie={hero} />
-      ) : (
-        <div className="h-[60vh] bg-gray-900" />
-      )}
+      {hero && <HeroBanner movie={hero} />}
 
       <div className="p-8">
         {/* Trending */}
@@ -68,7 +55,7 @@ const Home = () => {
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
             : trending
-                .slice(0, 6)
+                .slice(0, 10)
                 .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
@@ -79,7 +66,7 @@ const Home = () => {
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
             : popular
-                .slice(0, 6)
+                .slice(0, 10)
                 .map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
 
@@ -89,7 +76,7 @@ const Home = () => {
         <div className="flex gap-6 overflow-x-auto pb-4 mb-10">
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <Loader key={i} />)
-            : tvShows.slice(0, 6).map((show) => (
+            : tvShows.slice(0, 10).map((show) => (
                 <MovieCard
                   key={show.id}
                   movie={{

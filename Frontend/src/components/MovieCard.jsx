@@ -40,17 +40,18 @@ const MovieCard = ({ movie }) => {
           loading="lazy"
           width="342"
           height="513"
-          decoding="async"
           className="w-full h-75 object-cover"
-          onError={(e) => {
-            e.target.src = "https://via.placeholder.com/342x513?text=No+Image";
-          }}
         />
 
-        <button onClick={toggleFavorite} className="absolute top-2 right-2">
-          <span className={fav ? "text-red-500 text-xl" : "text-white text-xl"}>
-            {fav ? "❤️" : "🤍"}
-          </span>
+        <button
+          onClick={toggleFavorite}
+          className="absolute top-2 right-2 text-2xl"
+        >
+          <i
+            className={
+              fav ? "ri-heart-fill text-red-500" : "ri-heart-line text-white"
+            }
+          />
         </button>
 
         <div className="p-3">

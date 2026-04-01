@@ -85,12 +85,7 @@ const MovieDetails = () => {
 
   return (
     <div className="p-8 flex flex-col md:flex-row gap-10 text-white">
-      <img
-        src={poster}
-        className="w-62.5 rounded"
-        loading="lazy"
-        decoding="async"
-      />
+      <img src={poster} className="w-[250px] rounded" />
 
       <div>
         <h1 className="text-3xl font-bold mb-4">{movie.title}</h1>

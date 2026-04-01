@@ -12,11 +12,8 @@ const Login = () => {
 
     try {
       await loginUser(form);
-
-      localStorage.setItem("auth", Date.now());
-      window.dispatchEvent(new Event("authChange"));
-
       navigate("/");
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
