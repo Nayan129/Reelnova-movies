@@ -125,7 +125,7 @@ APIs
 
 Deployment
 
-- Netlify (Frontend)
+- Vercel (Frontend)
 - Render (Backend)
 - MongoDB Atlas
 - Redis Cloud
